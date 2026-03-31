@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Part 1 - Flash Drill</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #f4f7f6; padding: 50px; margin: 0; }
+    #card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+    
+    #counter { position: absolute; top: 20px; right: 20px; font-size: 14px; font-weight: bold; color: #6c757d; background: #e9ecef; padding: 5px 10px; border-radius: 10px; }
+    
+    #question { font-size: 28px; font-weight: 600; color: #333; margin-bottom: 30px; line-height: 1.4; min-height: 80px; display: flex; align-items: center; justify-content: center; margin-top: 30px; }
+    
+    button { background: #007bff; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: bold; box-shadow: 0 4px 6px rgba(0,123,255,0.2); }
+    button:hover { background: #0056b3; transform: translateY(-2px); }
+    button:active { transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div id="card">
+    <div id="counter">Câu: 0/33</div>
+    <div id="question">Nhấn nút bên dưới để bắt đầu luyện tập</div>
+    <button id="btn-next" onclick="nextQuestion()">Next Question 🎯</button>
+  </div>
+
+  <script>
+    const originalQuestions = [
+      "Is it better to study at home or at school?",
+      "Is it better to live in the city or in the countryside?",
+      "Would you rather go to school by flying car or teleportation?",
+      "Would you rather have a robot teacher or a human teacher?",
+      "If you could learn English with music or with games, which would you choose?",
+      "Would you rather learn from a book or from a YouTube channel?",
+      "Is it better to travel by motorbike or by bicycle in your city?",
+      "Would you rather live in a big city or a small town?",
+      "Do you think it's better to take notes by hand or on a computer?",
+      "Do you think online learning is better than learning in a classroom?",
+      "Is it better to live with your parents or alone as a young adult?",
+      "Should students work part-time or focus only on studying?",
+      "Do you prefer a native English teacher or a teacher who speaks your first language and has mastered English?",
+      "What’s the difference between living in the city and the countryside?",
+      "What are the differences between cities and towns?",
+      "What are the differences between driving in the countryside and driving in the city?",
+      "Why do some people choose to do their shopping in a street market rather than in a shopping mall?",
+      "Which are more effective: adverts on TV or adverts on social media?",
+      "Do men and women use the Internet for different purposes?",
+      "Do men and women spend their free time differently? How?",
+      "How different is life in the countryside compared to life in the city?",
+      "What are the advantages of e-books compared to paper books?",
+      "What are the advantages of living in the countryside compared to living in the city?",
+      "Have people’s preferred modes of transportation changed significantly in recent years?",
+      "How have the types of presents people give to each other changed over time?",
+      "How has education changed compared to the past?",
+      "Do people’s leisure activities change as they get older? How?",
+      "How do young people and older people differ in their use of technology?",
+      "Some people say different age groups have different tastes in Internet content. What do you think?",
+      "What are the differences between famous people today and those in the past?",
+      "Do you think adverts aimed at children are more acceptable on social media than on TV?",
+      "Do you think online shopping will replace shopping in-person?",
+      "Do you think paper books will someday disappear?"
+    ];
+
+    let remainingQuestions = [];
+    let currentCount = 0;
+    let totalQuestions = originalQuestions.length;
+
+    function init() {
+      remainingQuestions = [...originalQuestions];
+      currentCount = 0;
+      document.getElementById('counter').innerText = `Câu: 0/${totalQuestions}`;
+      document.getElementById('question').innerText = "Nhấn nút bên dưới để bắt đầu luyện tập";
+      document.getElementById('btn-next').innerText = "Next Question 🎯";
+      document.getElementById('btn-next').onclick = nextQuestion;
+    }
+
+    init();
+
+    function nextQuestion() {
+      const questionEl = document.getElementById('question');
+
+      if (remainingQuestions.length === 0) {
+        questionEl.innerText = "Tuyệt vời! Đã hoàn thành bộ Drill.";
+        document.getElementById('btn-next').innerText = "Restart Drill 🔄";
+        document.getElementById('btn-next').onclick = init;
+        return;
+      }
+
+      currentCount++;
+      document.getElementById('counter').innerText = `Câu: ${currentCount}/${totalQuestions}`;
+      
+      const randIndex = Math.floor(Math.random() * remainingQuestions.length);
+      const questionText = remainingQuestions.splice(randIndex, 1)[0];
+
+      questionEl.innerText = questionText;
+    }
+  </script>
+</body>
+</html>
